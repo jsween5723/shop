@@ -30,6 +30,10 @@ public class ShopEntity {
         address = createShop.address();
     }
 
+    public ShopEntity(long id) {
+        this.id = id;
+    }
+
     void modify(ModifyShop modifyShop) {
        name = modifyShop.name();
        contactNumber = modifyShop.contactNumber();

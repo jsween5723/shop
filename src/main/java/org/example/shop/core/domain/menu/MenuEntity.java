@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity(name = "menus")
-class MenuEntity {
+public class MenuEntity {
 
     @Id
     @GeneratedValue
@@ -16,6 +16,10 @@ class MenuEntity {
     private String description;
 
     protected MenuEntity() {
+    }
+
+    public MenuEntity(Long id) {
+        this.id = id;
     }
 
     private MenuEntity(String name, String category, int price, String description) {
@@ -37,7 +41,11 @@ class MenuEntity {
         description = modifyMenu.description();
     }
 
-    Menu toDomain() {
+    public Menu toDomain() {
         return new Menu(id, name, category, price, description);
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

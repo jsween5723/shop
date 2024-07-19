@@ -32,6 +32,10 @@ public class ConsumerEntity {
         address = consumer.address();
     }
 
+    public ConsumerEntity(Long id) {
+        this.id = id;
+    }
+
     Consumer toDomain() {
         return new Consumer(id, name, contactNumber, address);
     }
