@@ -1,4 +1,4 @@
-package org.example.shop.core.domain;
+package org.example.shop.core.domain.shop;
 
 import java.util.List;
 import org.springframework.stereotype.Service;

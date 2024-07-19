@@ -1,6 +1,6 @@
 package org.example.shop.api.shop;
 
-import org.example.shop.core.domain.Shop;
+import org.example.shop.core.domain.shop.Shop;
 
 record FindShopResponse(long id, String name, String address, String contactNumber) {
 

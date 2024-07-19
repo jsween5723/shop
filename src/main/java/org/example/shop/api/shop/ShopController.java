@@ -1,7 +1,7 @@
 package org.example.shop.api.shop;
 
 import java.util.List;
-import org.example.shop.core.domain.ShopService;
+import org.example.shop.core.domain.shop.ShopService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

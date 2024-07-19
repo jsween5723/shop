@@ -1,4 +1,4 @@
-package org.example.shop.core.domain;
+package org.example.shop.core.domain.shop;
 
 public class Shop {
     private final long id;
