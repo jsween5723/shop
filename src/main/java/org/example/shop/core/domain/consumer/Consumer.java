@@ -12,4 +12,20 @@ public class Consumer {
         this.contactNumber = contactNumber;
         this.address = address;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }
