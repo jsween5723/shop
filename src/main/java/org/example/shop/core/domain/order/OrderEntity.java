@@ -3,18 +3,22 @@ package org.example.shop.core.domain.order;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.time.ZonedDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.example.shop.core.domain.consumer.ConsumerEntity;
 import org.example.shop.core.domain.shop.ShopEntity;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity(name = "orders")
 class OrderEntity {
@@ -36,14 +40,28 @@ class OrderEntity {
     @BatchSize(size = 30) // N+1방지!!
     private Set<OrderItemEntity> items = new LinkedHashSet<>();
 
+    @CreationTimestamp
+    private ZonedDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.PENDING;
+    private Integer totalPrice;
+
     private OrderEntity(ConsumerEntity consumer, ShopEntity shop, Set<OrderItemEntity> items) {
         this.consumer = consumer;
         this.shop = shop;
         this.items = items;
     }
 
-    int calculateTotalPrice() {
+    private int calculateTotalPrice() {
         return items.stream().mapToInt(OrderItemEntity::getPrice).sum();
+    }
+
+    void changeStatus(OrderStatus newStatus) {
+        status = newStatus;
+        if (status == OrderStatus.COMPLETED) {
+            totalPrice = calculateTotalPrice();
+        }
     }
 
     OrderEntity(CreateOrder createOrder) {
@@ -51,6 +69,16 @@ class OrderEntity {
         shop = new ShopEntity(createOrder.shopId());
         items.addAll(
             createOrder.items().stream().map(OrderItemEntity::new).collect(Collectors.toSet()));
+    }
+
+    void modify (ModifyOrder createOrder) {
+        items.clear();
+        items.addAll(
+            createOrder.items().stream().map(OrderItemEntity::new).collect(Collectors.toSet()));
+    }
+    Order toDomain() {
+        return new Order(id, consumer.toDomain(), items.stream().map(OrderItemEntity::toDomain)
+            .collect(Collectors.toCollection(LinkedHashSet::new)), shop.toDomain(), createdAt);
     }
 
     protected OrderEntity() {

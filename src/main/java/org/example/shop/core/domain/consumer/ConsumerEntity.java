@@ -36,7 +36,7 @@ public class ConsumerEntity {
         this.id = id;
     }
 
-    Consumer toDomain() {
+    public Consumer toDomain() {
         return new Consumer(id, name, contactNumber, address);
     }
 }

@@ -40,7 +40,7 @@ public class ShopEntity {
        address = modifyShop.address();
     }
 
-    Shop toDomain() {
+    public Shop toDomain() {
         return new Shop(id, name, contactNumber, address);
     }
 }
