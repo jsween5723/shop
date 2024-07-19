@@ -36,4 +36,8 @@ class MenuEntity {
         price = modifyMenu.price();
         description = modifyMenu.description();
     }
+
+    Menu toDomain() {
+        return new Menu(id, name, category, price, description);
+    }
 }
