@@ -31,4 +31,8 @@ public class ConsumerEntity {
         contactNumber = consumer.contactNumber();
         address = consumer.address();
     }
+
+    Consumer toDomain() {
+        return new Consumer(id, name, contactNumber, address);
+    }
 }
