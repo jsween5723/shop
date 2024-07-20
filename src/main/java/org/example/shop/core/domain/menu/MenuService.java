@@ -43,4 +43,8 @@ public class MenuService {
         return repository.findByQuery(query).stream().map(MenuEntity::toDomain).toList();
     }
 
+    public List<RankMenu> findRank() {
+        return repository.rank3ByOrderCount();
+    }
+
 }

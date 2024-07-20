@@ -5,4 +5,5 @@ import org.example.shop.api.menu.FindMenuQuery;
 
 public interface MenuQueryRepository {
     List<MenuEntity> findByQuery(FindMenuQuery query);
+    List<RankMenu> rank3ByOrderCount();
 }

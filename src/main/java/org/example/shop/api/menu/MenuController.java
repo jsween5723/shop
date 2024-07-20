@@ -25,6 +25,11 @@ public class MenuController {
         return service.findAll(request).stream().map(FindMenuResponse::new).toList();
     }
 
+    @GetMapping("ranks")
+    public List<RankMenuResponse> findRank() {
+        return service.findRank().stream().map(RankMenuResponse::new).toList();
+    }
+
     @GetMapping("{id}")
     public FindMenuResponse findById(@PathVariable("id") long id) {
         return new FindMenuResponse(service.findById(id));

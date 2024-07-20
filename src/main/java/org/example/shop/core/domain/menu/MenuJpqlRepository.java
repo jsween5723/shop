@@ -28,6 +28,14 @@ public class MenuJpqlRepository implements MenuQueryRepository {
         return statement.getResultList();
     }
 
+    @Override
+    public List<RankMenu> rank3ByOrderCount() {
+        String sql = "select m.id, m.category, m.name, m.price, m.description, count(m) as totalOrderNumber "
+            + "from order_items oi join menus m "
+            + "group by m.id order by totalOrderNumber DESC limit 3";
+        return entityManager.createQuery(sql, RankMenu.class).getResultList();
+    }
+
     private boolean isExistCategory(FindMenuQuery query) {
         return query.category() != null && !query.category().isBlank();
     }
