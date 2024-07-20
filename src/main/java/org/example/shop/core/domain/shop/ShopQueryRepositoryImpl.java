@@ -17,19 +17,7 @@ public class ShopQueryRepositoryImpl implements ShopQueryRepository {
 
     @Override
     public List<ShopRevenue> findShopWithRevenue(FindShopRevenueQuery query) {
-        String sql = generateRevenueSql(query);
-        TypedQuery<ShopRevenue> statement = entityManager.createQuery(sql, ShopRevenue.class);
-        if (query.from() != null) {
-            statement.setParameter("from", query.from());
-        }
-        if (query.to() != null) {
-            statement.setParameter("to", query.to());
-        }
-        return statement.getResultList();
-    }
-
-    private String generateRevenueSql(FindShopRevenueQuery query) {
-        String sql = "select s.id, s.name, s.address, s.contactNumber, sum(o.totalPrice) as revenue from shops s join orders o group by s.id";
+        String sql = "select new org.example.shop.core.domain.shop.ShopRevenue(s.id, s.name, s.address, s.contactNumber, cast(coalesce(sum(o.totalPrice), 0) as int ))  from orders o right join shops s on o.shop.id = s.id group by s.id";
         if (query.from() != null || query.to() != null) {
             sql += "having ";
         }
@@ -42,6 +30,14 @@ public class ShopQueryRepositoryImpl implements ShopQueryRepository {
         if (query.to() != null) {
             sql += "o.completedAt < :to";
         }
-        return sql;
+        TypedQuery<ShopRevenue> statement = entityManager.createQuery(sql, ShopRevenue.class);
+        if (query.from() != null) {
+            statement.setParameter("from", query.from());
+        }
+        if (query.to() != null) {
+            statement.setParameter("to", query.to());
+        }
+        return statement.getResultList();
     }
+
 }

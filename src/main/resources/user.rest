@@ -1,0 +1,28 @@
+### 고객 추가
+POST localhost:8080/api/consumers
+Content-Type: application/json
+
+{
+  "name": "조현창",
+  "address": "주소",
+  "contactNumber": "010-0000-0000"
+}
+
+### 전체 고객 조회
+GET localhost:8080/api/consumers
+Accept: application/json
+
+### 고객 수정
+PUT localhost:8080/api/consumers/1
+Content-Type: application/json
+
+{
+  "name": "조현창",
+  "address": "주소2",
+  "contactNumber": "010-0000-0002"
+}
+
+
+### 고객 제거
+DELETE localhost:8080/api/consumers/1
+

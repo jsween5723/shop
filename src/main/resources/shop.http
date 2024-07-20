@@ -1,0 +1,30 @@
+### 가게 추가
+POST localhost:8080/api/shops
+Content-Type: application/json
+
+{
+  "name": "엄마김밥",
+  "address": "주소",
+  "contactNumber": "010-0000-0000"
+}
+
+### 전체 가게 조회
+GET localhost:8080/api/shops
+Accept: application/json
+
+### 전체 가게 매출 조회
+GET localhost:8080/api/shops/revenues
+Accept: application/json
+
+### 가게 수정
+PUT localhost:8080/api/shops/1
+Content-Type: application/json
+
+{
+  "name": "엄마김밥2",
+  "address": "주소2",
+  "contactNumber": "010-0000-0002"
+}
+
+### 가게 제거
+DELETE localhost:8080/api/shops/1

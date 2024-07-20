@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: shop
+  h2:
+    console:
+      path: /h2-console
+
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+
+
