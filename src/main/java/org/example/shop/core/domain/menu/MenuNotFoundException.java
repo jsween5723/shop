@@ -1,6 +1,8 @@
 package org.example.shop.core.domain.menu;
 
-class MenuNotFoundException extends RuntimeException {
+import org.example.shop.core.domain.common.NotFoundException;
+
+class MenuNotFoundException extends NotFoundException {
 
     public MenuNotFoundException(long id) {
         super(id+ "번 메뉴가 존재하지 않습니다.");
