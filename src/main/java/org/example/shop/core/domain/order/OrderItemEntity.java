@@ -36,6 +36,6 @@ class OrderItemEntity {
     }
 
     OrderItem toDomain() {
-        return new OrderItem(id, menu.toDomain(), qty);
+        return new OrderItem(menu.toDomain(), qty);
     }
 }

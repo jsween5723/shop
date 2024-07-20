@@ -7,8 +7,16 @@ public class OrderItem {
     private final Menu menu;
     private final int qty;
 
-    OrderItem(long id, Menu menu, int qty) {
+    OrderItem(Menu menu, int qty) {
         this.menu = menu;
         this.qty = qty;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public int getQty() {
+        return qty;
     }
 }
