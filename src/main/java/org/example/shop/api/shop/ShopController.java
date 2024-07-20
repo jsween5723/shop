@@ -34,6 +34,11 @@ public class ShopController {
         return service.findAll().stream().map(FindShopResponse::new).toList();
     }
 
+    @GetMapping("revenues")
+    public FindShopRevenueResponse findShopRevenues(FindShopRevenueQuery query) {
+        return new FindShopRevenueResponse(query, service.findShopRevenue(query));
+    }
+
     @GetMapping("{id}")
     public FindShopResponse findById(@PathVariable("id") long id) {
         return new FindShopResponse(service.findById(id));

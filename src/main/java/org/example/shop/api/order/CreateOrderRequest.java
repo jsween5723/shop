@@ -12,7 +12,7 @@ record CreateOrderRequest(long consumerId, long shopId, Set<CreateOrderItemRequs
             items.stream().map(CreateOrderItemRequst::toDoamin).collect(Collectors.toSet()));
     }
 
-    private record CreateOrderItemRequst(long menuId, int qty) {
+    record CreateOrderItemRequst(long menuId, int qty) {
 
         CreateOrderItem toDoamin() {
             return new CreateOrderItem(menuId, qty);

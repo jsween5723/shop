@@ -1,6 +1,7 @@
 package org.example.shop.core.domain.shop;
 
 import java.util.List;
+import org.example.shop.api.shop.FindShopRevenueQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,5 +43,9 @@ public class ShopService {
 
     public List<Shop> findAll() {
         return repository.findAll().stream().map(ShopEntity::toDomain).toList();
+    }
+
+    public List<ShopRevenue> findShopRevenue(FindShopRevenueQuery query) {
+        return repository.findShopWithRevenue(query);
     }
 }

@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import org.example.shop.core.domain.consumer.ConsumerEntity;
 import org.example.shop.core.domain.shop.ShopEntity;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity(name = "orders")
 class OrderEntity {
@@ -40,8 +39,7 @@ class OrderEntity {
     @BatchSize(size = 30) // N+1방지!!
     private Set<OrderItemEntity> items = new LinkedHashSet<>();
 
-    @CreationTimestamp
-    private ZonedDateTime createdAt;
+    private ZonedDateTime completedAt;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
@@ -61,6 +59,7 @@ class OrderEntity {
         status = newStatus;
         if (status == OrderStatus.COMPLETED) {
             totalPrice = calculateTotalPrice();
+            completedAt = ZonedDateTime.now();
         }
     }
 
@@ -78,7 +77,7 @@ class OrderEntity {
     }
     Order toDomain() {
         return new Order(id, consumer.toDomain(), items.stream().map(OrderItemEntity::toDomain)
-            .collect(Collectors.toCollection(LinkedHashSet::new)), shop.toDomain(), createdAt);
+            .collect(Collectors.toCollection(LinkedHashSet::new)), shop.toDomain(), completedAt, totalPrice);
     }
 
     protected OrderEntity() {
