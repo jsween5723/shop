@@ -21,8 +21,8 @@ public class MenuController {
     }
 
     @GetMapping
-    public List<FindMenuResponse> findAll() {
-        return service.findAll().stream().map(FindMenuResponse::new).toList();
+    public List<FindMenuResponse> findAll(FindMenuQuery request) {
+        return service.findAll(request).stream().map(FindMenuResponse::new).toList();
     }
 
     @GetMapping("{id}")

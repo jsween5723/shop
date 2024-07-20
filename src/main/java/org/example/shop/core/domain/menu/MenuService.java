@@ -1,6 +1,7 @@
 package org.example.shop.core.domain.menu;
 
 import java.util.List;
+import org.example.shop.api.menu.FindMenuQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,8 +39,8 @@ public class MenuService {
         return getEntityById(id).toDomain();
     }
 
-    public List<Menu> findAll() {
-        return repository.findAll().stream().map(MenuEntity::toDomain).toList();
+    public List<Menu> findAll(FindMenuQuery query) {
+        return repository.findByQuery(query).stream().map(MenuEntity::toDomain).toList();
     }
 
 }
