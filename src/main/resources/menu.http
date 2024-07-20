@@ -1,0 +1,47 @@
+### 메뉴 추가
+POST localhost:8080/api/menus
+Content-Type: application/json
+
+{
+  "name": "김밥",
+  "category": "분식",
+  "price": 2000,
+  "description": "계란이 많아요"
+}
+
+### 메뉴 추가
+POST localhost:8080/api/menus
+Content-Type: application/json
+
+{
+  "name": "돈까스",
+  "category": "일식",
+  "price": 5000,
+  "description": "돼지고기"
+}
+
+### 전체 메뉴 조회
+GET localhost:8080/api/menus
+Accept: application/json
+
+### 인기 메뉴 조회
+GET localhost:8080/api/menus/ranks
+Accept: application/json
+
+### 특정 카테고리 조회
+GET localhost:8080/api/menus?category=일식
+Accept: application/json
+
+### 메뉴 수정
+PUT localhost:8080/api/menus/1
+Content-Type: application/json
+
+{
+  "name": "김밥",
+  "category": "분식",
+  "price": 2000,
+  "description": "밥이 많아요"
+}
+
+### 메뉴 제거
+DELETE localhost:8080/api/menus/1
