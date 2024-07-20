@@ -1,4 +1,4 @@
-package org.example.shop.core.domain.common;
+package org.example.shop.core.common;
 
 public class BusinessException extends RuntimeException {
     public final String code;

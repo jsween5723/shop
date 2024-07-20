@@ -1,6 +1,6 @@
 package org.example.shop.core.domain.consumer;
 
-import org.example.shop.core.domain.common.NotFoundException;
+import org.example.shop.core.common.NotFoundException;
 
 public class ConsumerNotFoundException extends NotFoundException {
 

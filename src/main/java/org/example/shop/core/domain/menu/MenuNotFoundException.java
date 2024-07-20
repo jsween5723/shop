@@ -1,6 +1,6 @@
 package org.example.shop.core.domain.menu;
 
-import org.example.shop.core.domain.common.NotFoundException;
+import org.example.shop.core.common.NotFoundException;
 
 class MenuNotFoundException extends NotFoundException {
 
