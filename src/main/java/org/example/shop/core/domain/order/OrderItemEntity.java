@@ -13,11 +13,11 @@ class OrderItemEntity {
     @Id @GeneratedValue
     private Long id;
 
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", nullable = false, updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private OrderEntity order;
 
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "menu_id", nullable = false, updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private MenuEntity menu;
     private int qty;
@@ -25,7 +25,8 @@ class OrderItemEntity {
     protected OrderItemEntity() {
     }
 
-    OrderItemEntity(CreateOrderItem item) {
+    OrderItemEntity(OrderEntity order, CreateOrderItem item) {
+        this.order = order;
         menu = new MenuEntity(item.menuId());
         qty = item.qty();
     }

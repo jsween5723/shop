@@ -17,7 +17,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.example.shop.core.domain.consumer.ConsumerEntity;
 import org.example.shop.core.domain.shop.ShopEntity;
-import org.hibernate.annotations.BatchSize;
 
 @Entity(name = "orders")
 class OrderEntity {
@@ -35,8 +34,7 @@ class OrderEntity {
 
     //    OneToMany,Cascade 한 이유는~ 개별 생성, 수정, 삭제가 없이 Order라는 애그리거트 루트에 종속된 경우기 때문입니다~~
 //    리스트 요소 전체가 하나의 값으로 취급되는 경우여서 사용했습니다.
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    @BatchSize(size = 30) // N+1방지!!
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderItemEntity> items = new LinkedHashSet<>();
 
     private ZonedDateTime completedAt;
@@ -66,18 +64,20 @@ class OrderEntity {
     OrderEntity(CreateOrder createOrder) {
         consumer = new ConsumerEntity(createOrder.consumerId());
         shop = new ShopEntity(createOrder.shopId());
-        items.addAll(
-            createOrder.items().stream().map(OrderItemEntity::new).collect(Collectors.toSet()));
+        items.addAll(createOrder.items().stream().map(item -> new OrderItemEntity(this, item))
+            .collect(Collectors.toSet()));
     }
 
-    void modify (ModifyOrder createOrder) {
+    void modify(ModifyOrder createOrder) {
         items.clear();
-        items.addAll(
-            createOrder.items().stream().map(OrderItemEntity::new).collect(Collectors.toSet()));
+        items.addAll(createOrder.items().stream().map(item -> new OrderItemEntity(this, item))
+            .collect(Collectors.toSet()));
     }
+
     Order toDomain() {
         return new Order(id, consumer.toDomain(), items.stream().map(OrderItemEntity::toDomain)
-            .collect(Collectors.toCollection(LinkedHashSet::new)), shop.toDomain(), completedAt, totalPrice);
+            .collect(Collectors.toCollection(LinkedHashSet::new)), shop.toDomain(), completedAt, status,
+            totalPrice);
     }
 
     protected OrderEntity() {

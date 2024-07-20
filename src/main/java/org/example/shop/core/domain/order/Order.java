@@ -14,7 +14,7 @@ public class Order {
     private final ZonedDateTime createdAt;
     private OrderStatus status = OrderStatus.PENDING;
     private Integer totalPrice;
-    Order(long id, Consumer consumer, Set<OrderItem> items, Shop shop, ZonedDateTime createdAt,
+    Order(long id, Consumer consumer, Set<OrderItem> items, Shop shop, ZonedDateTime createdAt, OrderStatus status,
         Integer totalPrice) {
         this.id = id;
         this.consumer = consumer;
