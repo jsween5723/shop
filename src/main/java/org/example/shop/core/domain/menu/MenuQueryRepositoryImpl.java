@@ -4,12 +4,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 import org.example.shop.api.menu.FindMenuQuery;
+import org.springframework.stereotype.Repository;
 
-public class MenuJpqlRepository implements MenuQueryRepository {
+@Repository
+public class MenuQueryRepositoryImpl implements MenuQueryRepository {
 
     private final EntityManager entityManager;
 
-    public MenuJpqlRepository(EntityManager entityManager) {
+    public MenuQueryRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

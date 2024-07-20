@@ -4,12 +4,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 import org.example.shop.api.shop.FindShopRevenueQuery;
+import org.springframework.stereotype.Repository;
 
-public class ShopJpqlRepository implements ShopQueryRepository {
+@Repository
+public class ShopQueryRepositoryImpl implements ShopQueryRepository {
 
     private final EntityManager entityManager;
 
-    public ShopJpqlRepository(EntityManager entityManager) {
+    public ShopQueryRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

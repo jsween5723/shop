@@ -35,7 +35,7 @@ class OrderEntity {
 
     //    OneToMany,Cascade 한 이유는~ 개별 생성, 수정, 삭제가 없이 Order라는 애그리거트 루트에 종속된 경우기 때문입니다~~
 //    리스트 요소 전체가 하나의 값으로 취급되는 경우여서 사용했습니다.
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @BatchSize(size = 30) // N+1방지!!
     private Set<OrderItemEntity> items = new LinkedHashSet<>();
 
