@@ -79,7 +79,7 @@ Content-Type: application/json
 
 {
   "consumerId": 1,
-  "shopId": 1,
+  "shopId": 2,
   "items": [{
     "menuId": 1,
     "qty": 10
@@ -174,4 +174,8 @@ Accept: application/json
 
 ### 인기 메뉴 조회
 GET localhost:8080/api/menus/ranks
+Accept: application/json
+
+### 전체 가게 매출 조회
+GET localhost:8080/api/shops/revenues
 Accept: application/json
